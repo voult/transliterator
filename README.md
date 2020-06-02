@@ -2,7 +2,11 @@
 
 A PHP < 5.4 fallback for `transliterator_transliterate()`
 
+For original version, use:
 > composer require lukemadhanga/php-transliterator
+
+This version:
+> 
 
 PHP 5.4 has a built-in function, `transliterator_transliterate()` which does exactly what it says on the tin. This class works as a basic fallback for that function which is available from PHP5.4 with the `intl` package installed.
 
@@ -29,10 +33,13 @@ PHP 5.4 has a built-in function, `transliterator_transliterate()` which does exa
     Cyrillic Extended-A
     Cyrillic Extended-B
     Latin Extended-D
+    
+#### This version (added) ####
+    Arabic
 
-#### Usage ####
+#### Usage (this version) ####
 
     # If no composer:
     include_once 'path/to/Transliterator.php';
     
-    echo \LukeMadhanga\Transliterator::convert('Antonín Dvořák'); // Antonin Dvorak
+    echo \Voult\Transliterator::convert('Antonín Dvořák'); // Antonin Dvorak
