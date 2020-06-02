@@ -6,7 +6,7 @@ For original version, use:
 > composer require lukemadhanga/php-transliterator
 
 This version:
-> 
+> set it as a repositories package in composer.json
 
 PHP 5.4 has a built-in function, `transliterator_transliterate()` which does exactly what it says on the tin. This class works as a basic fallback for that function which is available from PHP5.4 with the `intl` package installed.
 
