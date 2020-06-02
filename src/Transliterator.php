@@ -1,8 +1,32 @@
 <?php
 
-namespace LukeMadhanga;
+namespace Voult;
 
 /**
+ * https://github.com/LukeMadhanga/transliterator
+ *
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 Luke Madhanga
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
  * Comprehensive string converter for PHP < 5.4
  * Supported blocks:
  * Basic Latin
@@ -26,10 +50,14 @@ namespace LukeMadhanga;
  * Cyrillic Extended-A
  * Cyrillic Extended-B
  * Latin Extended-D
+ * Arabic
  */
-class Transliterator {
-
-    private static $fromchars = array(
+class Transliterator
+{
+    /**
+     * @var string[]
+     */
+    protected static $fromchars = [
         "\xe2\x80\x9a",    // ‚ (,)
         "\xc6\x92",    // ƒ (f)
         "\xe2\x80\x9e",    // „ (,,)
@@ -1304,8 +1332,60 @@ class Transliterator {
         "\xe2\x81\x89",    // ⁉ (!?)
         "\xe2\x81\x8e",    // ⁎ (*)
         "\xe2\x81\x9f",    //   ( )
-    );
-    private static $tochars = array(
+        
+        "\xd8\xa1",
+        "\xd8\xa2",
+        "\xd8\xa3",
+        "\xd8\xa4",
+        "\xd8\xa5",
+        "\xd8\xa6",
+        "\xd8\xa7",
+        "\xd8\xa8",
+        "\xd8\xa9",
+        "\xd8\xaa",
+        "\xd8\xab",
+        "\xd8\xac",
+        "\xd8\xad",
+        "\xd8\xae",
+        "\xd8\xaf",
+        "\xd8\xb0",
+        "\xd8\xb1",
+        "\xd8\xb2",
+        "\xd8\xb3",
+        "\xd8\xb4",
+        "\xd8\xb5",
+        "\xd8\xb6",
+        "\xd8\xb7",
+        "\xd8\xb8",
+        "\xd8\xb9",
+        "\xd8\xba",
+        "\xd9\x80",
+        "\xd9\x81",
+        "\xd9\x82",
+        "\xd9\x83",
+        "\xd9\x84",
+        "\xd9\x85",
+        "\xd9\x86",
+        "\xd9\x87",
+        "\xd9\x88",
+        "\xd9\x89",
+        "\xd9\x8a",
+        "\xd9\x8b",
+        "\xd9\x8c",
+        "\xd9\x8d",
+        "\xd9\x8e",
+        "\xd9\x8f",
+        "\xd9\x90",
+        "\xd9\x91",
+        "\xd9\x92",
+        "\xd9\xb0",
+        "\xd9\xb1",
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected static $tochars = [
         ',',    // ‚
         'f',    // ƒ
         ',,',    // „
@@ -1596,8 +1676,8 @@ class Transliterator {
         'o',    // ǫ
         'O',    // Ǭ
         'o',    // ǭ
-        'Ʒ',    // Ǯ
-        'ʒ',    // ǯ
+        'Z',    // Ǯ
+        'z',    // ǯ
         'j',    // ǰ
         'DZ',    // Ǳ
         'Dz',    // ǲ
@@ -1725,15 +1805,15 @@ class Transliterator {
         'ts',    // ʦ
         'ls',    // ʪ
         'lz',    // ʫ
-        '̀',    // ̀
-        '́',    // ́
-        '̓',    // ̓
-        '̈́',    // ̈́
-        'ʹ',    // ʹ
+        '',    // ̀
+        '',    // ́
+        '',    // ̓
+        '',    // ̈́
+        '\'',    // ʹ
         'i',    // ͺ
         ';',    // ;
         'A',    // Ά
-        '·',    // ·
+        '-',    // ·
         'E',    // Έ
         'E',    // Ή
         'I',    // Ί
@@ -1862,9 +1942,9 @@ class Transliterator {
         'C',    // Ч
         'S',    // Ш
         'S',    // Щ
-        'ʺ̱',    // Ъ
+        '"',    // Ъ
         'Y',    // Ы
-        'ʹ̱',    // Ь
+        '\'',    // Ь
         'E',    // Э
         'U',    // Ю
         'A',    // Я
@@ -1894,9 +1974,9 @@ class Transliterator {
         'c',    // ч
         's',    // ш
         's',    // щ
-        'ʺ',    // ъ
+        '"',    // ъ
         'y',    // ы
-        'ʹ',    // ь
+        '\'',    // ь
         'e',    // э
         'u',    // ю
         'a',    // я
@@ -1936,10 +2016,10 @@ class Transliterator {
         'ae',    // ӕ
         'E',    // Ӗ
         'e',    // ӗ
-        'Ə',    // Ә
-        'ə',    // ә
-        'Ə',    // Ӛ
-        'ə',    // ӛ
+        'Y',    // Ә
+        'y',    // ә
+        'Y',    // Ӛ
+        'y',    // ӛ
         'Z',    // Ӝ
         'z',    // ӝ
         'Z',    // Ӟ
@@ -1969,7 +2049,7 @@ class Transliterator {
         'E',    // Ե
         'Z',    // Զ
         'E',    // Է
-        'Ə',    // Ը
+        'Y',    // Ը
         'Tʻ',    // Թ
         'Z',    // Ժ
         'I',    // Ի
@@ -2007,7 +2087,7 @@ class Transliterator {
         'e',    // ե
         'z',    // զ
         'e',    // է
-        'ə',    // ը
+        'y',    // ը
         'tʻ',    // թ
         'z',    // ժ
         'i',    // ի
@@ -2504,7 +2584,7 @@ class Transliterator {
         'A',    // Ά
         'AI',    // ᾼ
         'i',    // ι
-        '¨̂',    // ῁
+        '^̂',    // ῁
         'ei',    // ῂ
         'ei',    // ῃ
         'ei',    // ῄ
@@ -2515,7 +2595,7 @@ class Transliterator {
         'E',    // Ὴ
         'E',    // Ή
         'EI',    // ῌ
-        '᾿̂',    // ῏
+        '^',    // ῏
         'i',    // ῐ
         'i',    // ῑ
         'i',    // ῒ
@@ -2526,7 +2606,7 @@ class Transliterator {
         'I',    // Ῑ
         'I',    // Ὶ
         'I',    // Ί
-        '῾̂',    // ῟
+        '^',    // ῟
         'y',    // ῠ
         'y',    // ῡ
         'y',    // ῢ
@@ -2580,15 +2660,65 @@ class Transliterator {
         '!?',    // ⁉
         '*',    // ⁎
         ' ',    //  
-    );
-
+        
+        '\'', 
+        '|', 
+        '>',
+        '&', 
+        '<',
+        '}',
+        'A', 
+        'b', 
+        'p',
+        't', 
+        'v', 
+        'j',
+        'H', 
+        'x', 
+        'd',
+        '*', 
+        'r', 
+        'z',
+        's', 
+        '$', 
+        'S',
+        'D', 
+        'T', 
+        'Z',
+        'E', 
+        'g', 
+        '_',
+        'f', 
+        'q', 
+        'k',
+        'l', 
+        'm', 
+        'n',
+        'h', 
+        'w', 
+        'Y',
+        'y', 
+        'F', 
+        'N',
+        'K', 
+        'a', 
+        'u',
+        'i', 
+        '~', 
+        'o',
+        '`', 
+        '{',
+    ];
+    
     /**
      * A basic PHP < 5.4 fallback for transliterator_transliterate
+     *
      * @param string $string The string to convert into ASCII
      * @return string The transliterated string
      */
-    static function convert($string) {
+    public static function convert($string)
+    {
         return str_replace(self::$fromchars, self::$tochars, $string);
-    }          
-
+    }
 }
+
